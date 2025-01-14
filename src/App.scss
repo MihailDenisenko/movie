@@ -1,0 +1,59 @@
+// @import "./Components/PageNotFound/PageNotFound.scss";
+@use './Components/Film/Film.scss';
+@use './Components/Films/Films.scss';
+@use './Components/fonts/fonts.scss';
+
+.loadered {
+    text-align: center;
+    margin: 0 auto;
+}
+ body {
+    width: 100%;
+ }
+
+ #root {
+    width: 100%;
+ }
+
+.loder {
+    display: inline;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-right: 15px;
+}
+
+.notInternet {
+    width: 50px;
+    margin-left: 50%;
+    position: absolute;
+    top: 5px;
+}
+
+.alert {
+    position: relative;
+    margin-left: 12px;
+    width: 95%;
+    min-width: 250px;
+}
+
+@media screen and (width>1200px) {
+    
+    .alert {
+        margin-left: 135px;
+    }
+}
+
+
+@media screen and (width>1180px) {
+    
+    .alert {
+        margin-left: 5%;
+    }
+}
+
+@media screen and (width<500px) {
+    .notInternet{
+        margin-left: 65%;
+    }
+}

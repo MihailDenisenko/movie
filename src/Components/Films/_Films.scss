@@ -1,0 +1,17 @@
+.films {
+  display: block;
+  max-width: 451px;
+  width: 100%;
+  min-width: 260px;
+  height: 279px;
+  // border: 1px solid black;
+  margin-top: 20px;
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.15);
+}
+
+.div__films {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-around;
+}
