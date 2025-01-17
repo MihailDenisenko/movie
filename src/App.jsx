@@ -1,16 +1,14 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useState } from 'react';
-// import reactLogo from '../src/Components/PageNotFound/pageNotFound.png';
-// import viteLogo from '/vite.svg';
 import './App.scss';
-// import { Routes, Route } from 'react-router';
 import Home from './Components/Home/Home';
 import { Offline, Online } from 'react-detect-offline'; 
 import { Alert } from 'antd';
 import logo from './Components/img/notInternet.png';
-// import { CloseCircleOutlined } from '@ant-design/icons';
-// import React from 'react';
 import { Spin } from 'antd';
+
+
+
 const contentStyle = {
   padding: 50,
   background: 'rgba(0, 0, 0, 0.05)',
@@ -40,14 +38,13 @@ function App() {
     setTimeout(() => {
       setLoader(false)
     }, 500) : '';
-    console.log(loader)
 
   return (
     <>
       {
         loader ? loaded:
       <Online>
-        <Home />
+            <Home />
       </Online>
       }
       <Offline>

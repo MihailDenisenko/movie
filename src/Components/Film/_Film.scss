@@ -39,6 +39,7 @@
 }
 
 .about {
+
   max-height: 279px;
   overflow: hidden;
 
@@ -56,11 +57,44 @@
     line-height: 20px;
   }
   .title {
+    position: relative;
     font-family: 'inter';
     font-size: 20px;
     margin-bottom: 5px;
     margin-top: 5px;
+    display: flex;
+    
+    &__b {
+      align-self: center;
+    }
   }
+  .vote_average{
+    text-align: center;
+    justify-self: center;
+    align-self: flex-end;
+    padding: 8px;
+    margin-left: auto;
+    width: 50px;
+    height: 50px;
+    top: 25px;
+    right: 0px;
+    // position: absolute;
+    border-radius: 50%
+  }
+  .m1 {
+    border: solid, 2px #E90000 ;
+  }
+  .m2 {
+    border: solid, 2px #E97E00 ;
+  }
+  .m3 {
+    border: solid, 2px #E9D100 ;
+  }
+  .m4 {
+    border: solid, 2px #66E900 ;
+  }
+
+
   .geners {
     list-style: none;
     display: flex;

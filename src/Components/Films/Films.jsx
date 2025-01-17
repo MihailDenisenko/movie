@@ -1,26 +1,34 @@
+ 
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import 'react';
+import React, { useState, useEffect } from 'react';
 
 import Film from '../Film/Film';
-// import js from '@eslint/js';
-import React, { useState, useEffect } from 'react';
-import { Alert, Flex, Spin } from 'antd';
-import { tr } from 'date-fns/locale';
+import {  Flex, Spin } from 'antd';
+import { useDebounce } from 'use-debounce';
+import { HomeContext } from '../Home/Home';
 
 export default function Films() {
+  const { setJson,  paginPage, languageSearch, loading, searchVal } = React.useContext(HomeContext);
+  
   const [items, setItems] = useState([]);
   const [elem, setElem] = useState(false);
   const [loader, setLoader] = useState(false);
+  const [searchValDebounse] = useDebounce(searchVal, 800);
 
-  const searchText = 'sonic';
-  // const lang = 'en-US';
-  const lang = 'ru-RU';
+  
+  const lang = languageSearch;
+  const errorText =
+    languageSearch !== 'en-En'
+      ? 'К сожалению ничего не найдено, попробуйте изменить ваш запрос'
+      : 'Sorry, nothing was found, please try to change your query.';
 
   const Api_Token =
     'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1ZDM4YmY4YTE5MmViNjZjODNlNjQ5MThlZmU3MmIwMyIsIm5iZiI6MTczNjQyMjYxNy45Miwic3ViIjoiNjc3ZmI0ZDljODFhY2FhNjNkYmI0MGJlIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.GlmLBJCWFLv60L3djTWk7GT-wMerRss5NcYKYvKG8K8';
 
-  const url = `https://api.themoviedb.org/3/search/movie?query=${searchText}&include_adult=false&language=${lang}&page=1`;
+  const url = `https://api.themoviedb.org/3/search/movie?query=${searchVal}&include_adult=false&language=${lang}&page=${paginPage}`;
+  const urlStart = `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=${lang}&page=${paginPage}&sort_by=popularity.desc`;
 
   const urlImg = 'https://image.tmdb.org/t/p/w500';
   // const urlImg = 'https://image.tmdb.org/t/p/original'
@@ -34,41 +42,81 @@ export default function Films() {
   };
 
   useEffect(() => {
-    fetch(url, options)
+    fetch(urlStart, options)
       .then((res) => res.json())
       .then((json) => {
         // console.log(json)
         setTimeout(() => {
+          setJson(json);
           setItems(...items, json.results);
           setLoader(false);
-          console.log(loader);
+          loading(false, json.total_pages);
         }, 500);
       })
       .catch((err) => console.error(err));
   }, []);
 
-  useEffect(() => {}, [items]);
+  useEffect(() => {
+    searchVal.length !== 0
+      ? fetch(
+          `https://api.themoviedb.org/3/search/movie?query=${searchVal}&include_adult=false&language=${lang}&page=${paginPage}`,
+          options,
+        )
+          .then((resp) => resp.json())
+          .then((json) => {
+            setJson(json);
+            loading(false, json.total_pages);
+            setItems(json.results);
+          })
+          .catch((er) => console.log(er))
+      : fetch(urlStart, options)
+          .then((res) => res.json())
+          .then((json) => {
+            setJson(json);
+            setItems(json.results);
+            loading(false, json.total_pages);
+          })
+          .catch((err) => console.error(err));
+  }, [searchValDebounse, paginPage, lang]);
 
-  const elements = items.map((it, i) => {
-    // console.log(it);
-    const { id, overview, backdrop_path, original_title, title, popularity, release_date } = it;
+  const elements =
+    items.length !== 0 ? (
+      items.map((it, i) => {
+        // console.log(it);
+        const {
+          id,
+          overview,
+          backdrop_path,
+          original_title,
+          title,
+          popularity,
+          release_date,
+          vote_average,
+        } = it;
 
-    return (
-      <div className="films" key={id}>
-        <Film
-          id={id}
-          label={original_title}
-          overview={overview}
-          img={backdrop_path !== null ? urlImg + backdrop_path : null}
-          title={title}
-          popularity={popularity}
-          release_date={release_date}
-          options={options}
-        />
-        <br />
-      </div>
+        return (
+          <div className="films" key={id}>
+            <Film
+              vote_average={vote_average}
+              lang={lang}
+              id={id}
+              label={original_title}
+              overview={overview}
+              img={backdrop_path !== null ? urlImg + backdrop_path : null}
+              title={title}
+              popularity={popularity}
+              release_date={release_date}
+              options={options}
+            />
+            <br />
+          </div>
+        );
+      })
+    ) : (
+      <h1 className="error__h1">
+        <span className="box">{errorText}</span>
+      </h1>
     );
-  });
 
   const contentStyle = (React.CSSProperties = {
     padding: 200,

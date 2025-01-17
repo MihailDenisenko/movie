@@ -1,0 +1,25 @@
+body {
+    position: relative;
+}
+#root {
+    position: absolute;
+    top: 0;
+    margin: 500px;
+}
+
+.pagination {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+.div__home {
+    position: absolute;
+    top: 0;
+}
+
+.div__search {
+    position: absolute;
+    top: 0;
+    width: 50%;
+}

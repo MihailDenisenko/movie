@@ -2,6 +2,17 @@
 @use './Components/Film/Film.scss';
 @use './Components/Films/Films.scss';
 @use './Components/fonts/fonts.scss';
+@use './Components/Pagination/Pagination';
+
+body {
+    display: block;
+    position: relative;
+}
+
+#root {
+    position: absolut;
+    top: 0;
+}   
 
 .loadered {
     text-align: center;

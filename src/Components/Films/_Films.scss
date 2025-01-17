@@ -1,3 +1,5 @@
+@import '../fonts/fonts';
+
 .films {
   display: block;
   max-width: 451px;
@@ -10,8 +12,20 @@
 }
 
 .div__films {
+  margin-bottom: 150px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-around;
+}
+
+.error__h1 {
+  font-family: "errorText";
+  margin: 400px 0;
+  text-align: center;
+  box-shadow: 8px 9px 10px 0  red;
+
+  @media screen and (width<800px) {
+    margin: 150px 0;
+  }
 }
