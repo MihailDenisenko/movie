@@ -1,8 +1,5 @@
-
-import 'react'
+import 'react';
 import { Image } from 'antd';
-
-  
 
 export default function Imagee() {
   return (

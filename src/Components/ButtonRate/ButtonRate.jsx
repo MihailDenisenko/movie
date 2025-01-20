@@ -8,8 +8,7 @@ import React from 'react';
 
 
 export default function ButtonRate() {
-  const { languageSearch, setItems, setFavor, setPages } =
-    React.useContext(HomeContext);
+  const { languageSearch, setItems, setFavor, setPages } = React.useContext(HomeContext);
   // guestSession
   const options = {
     method: 'GET',
@@ -21,19 +20,19 @@ export default function ButtonRate() {
   };
   const rated = () => {
     // console.log(sessionStorage.getItem('guest_session_id'));
-    setFavor(true)
+    setFavor(true);
     fetch(
       `https://api.themoviedb.org/3/guest_session/${sessionStorage.getItem('guest_session_id')}/rated/movies?language=${languageSearch}&page=1&sort_by=created_at.asc`,
       options,
     )
       .then((res) => {
-        console.log(res)
+        console.log(res);
         if (res.ok) {
           return res.json();
-        }else setItems([])
+        } else setItems([]);
       })
       .then((json) => {
-        console.log(json)
+        console.log(json);
         setItems(json.results);
         setPages(json.total_pages);
         // console.log(sessionStorage.getItem('guest_session_id'));
@@ -44,7 +43,6 @@ export default function ButtonRate() {
   return (
     <div className={styles.root}>
       <Button
-       
         className={styles.button}
         type="primary"
         icon={<StarOutlined />}

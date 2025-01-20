@@ -1,7 +1,7 @@
-/* eslint-disable no-undef */
+ 
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-import { format } from 'date-fns';
+import * as dateFns from 'date-fns';
 import 'react';
 import React, { useContext } from 'react';
 import { Alert, Drawer, Flex, Spin } from 'antd';
@@ -10,7 +10,6 @@ import { ru } from 'date-fns/locale';
 import js from '@eslint/js';
 import Ratet from '../Ratet/Ratet';
 import { HomeContext } from '../Home/Home';
-
 
 export default function Film({
   lang,
@@ -22,8 +21,8 @@ export default function Film({
   popularity,
   release_date,
   options,
-  vote_average, 
-  colClass
+  vote_average,
+  colClass,
 }) {
   const [genres, setGenres] = useState([]);
   const [loader, setLoader] = useState(true);
@@ -40,9 +39,7 @@ export default function Film({
     setOpen(false);
   };
 
-
-  
-   useEffect(() => {
+  useEffect(() => {
     fetch(`https://api.themoviedb.org/3/movie/${id}?language=${lang}`, options)
       .then((resp) => resp.json())
       .then((json) => {
@@ -110,16 +107,16 @@ export default function Film({
                     <div className={`vote_average ${colClass}`}>{`${vote_average.toFixed(1)}`}</div>
                   </div>
                   <div className="release_date">
-                    {release_date ? format(release_date, 'd MMMM, yyyy', { locale: ru }) : ''}
+                    {release_date ? dateFns.format(release_date, 'd MMMM, yyyy', { locale: ru }) : ''}
                   </div>
                   <ul className="geners">{genres.length !== 0 ? gen : ''}</ul>
                   <div className="overview">{overview}</div>
                 </div>
               </div>
             </div>
-                  <div className="popularity">
-                    <Ratet id={id} onClick={onClose} className="ratet_bg ratetion" />
-                  </div>
+            <div className="popularity">
+              <Ratet id={id} onClick={onClose} className="ratet_bg ratetion" />
+            </div>
           </div>
 
           <div className="title__image"></div>
@@ -140,7 +137,7 @@ export default function Film({
           <b className="title__b_draw">{label.toUpperCase()}</b>
           <div className="release_date">
             {release_date
-              ? `${relise} - ${format(release_date, 'd MMMM, yyyy', { locale: ru })}`
+              ? `${relise} - ${dateFns.format(release_date, 'd MMMM, yyyy', { locale: ru })}`
               : ''}
           </div>
           <div>

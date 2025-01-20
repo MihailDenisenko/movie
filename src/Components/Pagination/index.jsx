@@ -1,3 +1,3 @@
-import Pagin from "./Pagination";
+import Pagin from './Pagination';
 
-export default Pagin
+export default Pagin;

@@ -1,13 +1,11 @@
-/* eslint-disable react/no-unescaped-entities */
+ 
 import { useState } from 'react';
 import './App.scss';
 import Home from './Components/Home/Home';
-import { Offline, Online } from 'react-detect-offline'; 
+import { Offline, Online } from 'react-detect-offline';
 import { Alert } from 'antd';
 import logo from './Components/img/notInternet.png';
 import { Spin } from 'antd';
-
-
 
 const contentStyle = {
   padding: 50,
@@ -19,7 +17,6 @@ const content = (
     <div style={contentStyle} />
   </div>
 );
-
 
 function App() {
   const [loader, setLoader] = useState(true);
@@ -34,32 +31,34 @@ function App() {
     </div>
   );
 
-  loader ?
-    setTimeout(() => {
-      setLoader(false)
-    }, 500) : '';
+  loader
+    ? setTimeout(() => {
+        setLoader(false);
+      }, 500)
+    : '';
 
   return (
     <>
-      {
-        loader ? loaded:
-      <Online>
-            <Home />
-      </Online>
-      }
+      {loader ? (
+        loaded
+      ) : (
+        <Online>
+          <Home />
+        </Online>
+      )}
       <Offline>
-        {loader ? '' : 
-        (
+        {loader ? (
+          ''
+        ) : (
           <div className="alert">
-          <Alert
-            message="Ошибка подключения"
-            description="Извините, но в настоящее время ваше подключение к интернету не работает!!! Попробуйте проверить настройки сети или переподключитесь к другой сети"
-            type="error"
+            <Alert
+              message="Ошибка подключения"
+              description="Извините, но в настоящее время ваше подключение к интернету не работает!!! Попробуйте проверить настройки сети или переподключитесь к другой сети"
+              type="error"
             />
-          <img className="notInternet" src={logo} alt="NOt you Internet" />
-        </div>
-        )
-      }
+            <img className="notInternet" src={logo} alt="NOt you Internet" />
+          </div>
+        )}
       </Offline>
     </>
   );

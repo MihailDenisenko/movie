@@ -1,12 +1,12 @@
 /* eslint-disable no-undef */
- 
+
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 import 'react';
 import React, { useState, useEffect } from 'react';
 
 import Film from '../Film/Film';
-import {  Flex, Spin } from 'antd';
+import { Flex, Spin } from 'antd';
 import { useDebounce } from 'use-debounce';
 import { HomeContext } from '../Home/Home';
 
@@ -22,12 +22,12 @@ export default function Films() {
     items,
     setItems,
   } = React.useContext(HomeContext);
-  
+
   const [elem, setElem] = useState(false);
   const [loader, setLoader] = useState(false);
   const [searchValDebounse] = useDebounce(searchVal, 800);
   let colClass;
-  
+
   const lang = languageSearch;
   const errorText =
     languageSearch !== 'en-En'
@@ -64,15 +64,13 @@ export default function Films() {
         }, 500);
       })
       .catch((err) => console.error(err));
-    
-    
+
     fetch('https://api.themoviedb.org/3/authentication/guest_session/new', options)
       .then((resp) => resp.json())
       .then((json) => {
         sessionStorage.setItem('guest_session_id', json.guest_session_id);
       })
-          .catch((er) => console.log(er))
-      
+      .catch((er) => console.log(er));
   }, []);
 
   useEffect(() => {
@@ -98,7 +96,7 @@ export default function Films() {
           .catch((err) => console.error(err));
   }, [searchValDebounse, paginPage, lang]);
 
-  console.log(items)
+  console.log(items);
 
   const elements =
     items.length !== 0 ? (
@@ -114,13 +112,19 @@ export default function Films() {
           release_date,
           vote_average,
         } = it;
-        
-        if (vote_average >= 7) { colClass='m4' }
-        if (6.99 > vote_average && vote_average > 5) { colClass='m3' }
-        if (5 > vote_average && vote_average > 3) {
-          colClass='m2';
+
+        if (vote_average >= 7) {
+          colClass = 'm4';
         }
-        if (vote_average<3) {colClass= 'm1'}
+        if (6.99 > vote_average && vote_average > 5) {
+          colClass = 'm3';
+        }
+        if (5 > vote_average && vote_average > 3) {
+          colClass = 'm2';
+        }
+        if (vote_average < 3) {
+          colClass = 'm1';
+        }
 
         return (
           <div className="films" key={id}>

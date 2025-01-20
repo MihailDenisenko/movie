@@ -1,17 +1,15 @@
 import { Button } from 'antd';
 import { SearchOutlined } from '@ant-design/icons';
 import 'react';
-import styles from './ButtonSearch.module.scss'
+import styles from './ButtonSearch.module.scss';
 import { HomeContext } from '../Home/Home';
 import React from 'react';
 
-
 export default function ButtonSearch() {
-  
   const { setItems, optionsGet, lang, setFavor, setPages } = React.useContext(HomeContext);
 
-  const searched = () => { 
-    setFavor(false)
+  const searched = () => {
+    setFavor(false);
     fetch(
       `https://api.themoviedb.org/3/discover/movie?include_adult=false&include_video=false&language=${lang}&page=1&sort_by=popularity.desc`,
       optionsGet,
@@ -29,10 +27,9 @@ export default function ButtonSearch() {
         // loading(false, json.total_pages);
       })
       .catch((err) => console.error(err));
-   
-   };
+  };
 
-  const {languageSearch} = React.useContext(HomeContext)
+  const { languageSearch } = React.useContext(HomeContext);
   return (
     <div className={styles.root}>
       <Button

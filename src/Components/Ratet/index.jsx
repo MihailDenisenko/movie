@@ -1,3 +1,3 @@
-import Ratet from "./Ratet";
+import Ratet from './Ratet';
 
-export default Ratet
+export default Ratet;

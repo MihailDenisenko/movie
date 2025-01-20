@@ -20,10 +20,10 @@
 }
 
 .error__h1 {
-  font-family: "errorText";
+  font-family: 'errorText';
   margin: 400px 0;
   text-align: center;
-  box-shadow: 8px 9px 10px 0  red;
+  box-shadow: 8px 9px 10px 0 red;
 
   @media screen and (width<800px) {
     margin: 150px 0;

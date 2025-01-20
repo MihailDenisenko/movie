@@ -1,8 +1,7 @@
- 
-//  eslint-disable react/prop-types 
-import 'react'
+//  eslint-disable react/prop-types
+import 'react';
 
-import styles from "./Search.module.scss"
+import styles from './Search.module.scss';
 
 import { CloseOutlined } from '@ant-design/icons';
 
@@ -20,15 +19,12 @@ const items = [
     key: '2',
     label: 'En',
   },
- ];
+];
 
+export default function Search() {
+  const { searchVal, setSearchVal, languageSearch, setLanguageSearch, favor } =
+    React.useContext(HomeContext);
 
- 
- export default function Search() {
-    const { searchVal, setSearchVal, languageSearch, setLanguageSearch, favor } =
-     React.useContext(HomeContext);
-
-   
   return (
     <div className={styles.root}>
       {searchVal ? (
@@ -36,16 +32,18 @@ const items = [
       ) : (
         ''
       )}
-      {!favor?
-      <input
-        className={styles.input}
-        type="text"
-        placeholder={languageSearch!=='en-En'?"поиск фильмов":"Search Movies"}
-        onChange={(e) => setSearchVal(e.target.value)}
-        value={searchVal}
-        ></input>:''
-      }
-      
+      {!favor ? (
+        <input
+          className={styles.input}
+          type="text"
+          placeholder={languageSearch !== 'en-En' ? 'поиск фильмов' : 'Search Movies'}
+          onChange={(e) => setSearchVal(e.target.value)}
+          value={searchVal}
+        ></input>
+      ) : (
+        ''
+      )}
+
       <Dropdown
         className={styles.drop}
         menu={{
@@ -58,11 +56,11 @@ const items = [
             }
           },
           items,
-          
+
           defaultSelectedKeys: [''],
         }}
       >
-        <Typography.Link >
+        <Typography.Link>
           <Space>
             {languageSearch === 'ru-Ru' ? 'Русский' : 'English'}
             <DownOutlined />

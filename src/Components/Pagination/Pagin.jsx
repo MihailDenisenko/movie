@@ -4,7 +4,6 @@ import 'react';
 import React from 'react';
 import { Pagination } from 'antd';
 
-
 const itemRender = (_, type, originalElement) => {
   if (type === 'prev') {
     return <a>Previous</a>;
@@ -16,20 +15,19 @@ const itemRender = (_, type, originalElement) => {
 };
 
 export default function Pagin({ pages, paginPage, setPaginPage, languageSearch }) {
-
-  
-const itemRender = (_, type, originalElement) => {
-  if (type === 'prev') {
-    if (languageSearch !== 'en-En') { return <a>Предыдущий</a> }
-    else return <a>Previous</a>;
-  }
-  if (type === 'next') {
-    if (languageSearch !== 'en-En') {
-      return <a>Следующий</a>;
-    } else return <a>Next</a>;
-  }
-  return originalElement;
-};
+  const itemRender = (_, type, originalElement) => {
+    if (type === 'prev') {
+      if (languageSearch !== 'en-En') {
+        return <a>Предыдущий</a>;
+      } else return <a>Previous</a>;
+    }
+    if (type === 'next') {
+      if (languageSearch !== 'en-En') {
+        return <a>Следующий</a>;
+      } else return <a>Next</a>;
+    }
+    return originalElement;
+  };
 
   return (
     <div className="pagin">
