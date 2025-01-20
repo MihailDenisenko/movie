@@ -1,10 +1,12 @@
-body {
-    position: relative;
-}
+// body {
+//     position: relative;
+// }
 #root {
     position: absolute;
     top: 0;
-    margin: 500px;
+    left: 0;
+    width: 200%;
+    // margin: 500px;
 }
 
 .pagination {
@@ -18,8 +20,16 @@ body {
     top: 0;
 }
 
-.div__search {
-    position: absolute;
-    top: 0;
-    width: 50%;
+// .div__search {
+//     position: absolute;
+//     top: 0;
+//     width: 50%;
+// }
+.div__buttons {
+    display: flex;
+    margin-top: 5px;
+
+    flex-wrap: nowrap;
+    align-items: end;
+    text-align: center;
 }

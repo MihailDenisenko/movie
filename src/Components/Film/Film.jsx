@@ -1,12 +1,16 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { format } from 'date-fns';
 import 'react';
-import React from 'react';
-import { Alert, Flex, Spin } from 'antd';
+import React, { useContext } from 'react';
+import { Alert, Drawer, Flex, Spin } from 'antd';
 import { useState, useEffect } from 'react';
 import { ru } from 'date-fns/locale';
 import js from '@eslint/js';
+import Ratet from '../Ratet/Ratet';
+import { HomeContext } from '../Home/Home';
+
 
 export default function Film({
   lang,
@@ -18,12 +22,26 @@ export default function Film({
   popularity,
   release_date,
   options,
-  vote_average
+  vote_average, 
+  colClass
 }) {
   const [genres, setGenres] = useState([]);
   const [loader, setLoader] = useState(true);
-  const [colClass, setColClass] = useState('m4')
+  const [open, setOpen] = useState(false);
+  const { languageSearch } = useContext(HomeContext);
+  let relise;
+  // const [colClass, setColClass] = useState('m4')
+  languageSearch !== 'en-En' ? (relise = 'Дата выхода') : (relise = 'Release date');
+  const showDrawer = () => {
+    setOpen(true);
+  };
 
+  const onClose = () => {
+    setOpen(false);
+  };
+
+
+  
    useEffect(() => {
     fetch(`https://api.themoviedb.org/3/movie/${id}?language=${lang}`, options)
       .then((resp) => resp.json())
@@ -80,34 +98,57 @@ export default function Film({
       ) : (
         <div className="film">
           <div className="container text-center">
-            <div className="row">
+            <div className="row" onClick={showDrawer}>
               <div className="col">
                 <img className="title__img" src={img} alt={title} />
               </div>
               <div className="col">
                 <div className="about">
                   <div className="title">
-                      <b className='title__b'>{label.toUpperCase()}</b>
-                      <div >
-                      </div>
-                        <div className={`vote_average ${colClass}`}>{vote_average.toFixed(1)}</div>
-                    </div>
+                    <b className="title__b">{label.toUpperCase()}</b>
+                    <div></div>
+                    <div className={`vote_average ${colClass}`}>{`${vote_average.toFixed(1)}`}</div>
+                  </div>
                   <div className="release_date">
                     {release_date ? format(release_date, 'd MMMM, yyyy', { locale: ru }) : ''}
                   </div>
                   <ul className="geners">{genres.length !== 0 ? gen : ''}</ul>
                   <div className="overview">{overview}</div>
-                  <div className="popularity">
-                    {lang !== 'en-En' ? `Рейтинг - ${popularity}` : `Popularity - ${popularity}`}
-                  </div>
                 </div>
               </div>
             </div>
+                  <div className="popularity">
+                    <Ratet id={id} onClick={onClose} className="ratet_bg ratetion" />
+                  </div>
           </div>
 
           <div className="title__image"></div>
         </div>
       )}
+      <Drawer
+        className="DrawerClass"
+        width={980}
+        title="Basic Drawer"
+        onClose={onClose}
+        open={open}
+      >
+        <div className="div__draw_title">
+          <img className="title__img" src={img} alt={title} />
+          <div className={`vote_average ${colClass} onDraw`}>{`${vote_average.toFixed(1)}`}</div>
+        </div>
+        <div className="div__title_draw">
+          <b className="title__b_draw">{label.toUpperCase()}</b>
+          <div className="release_date">
+            {release_date
+              ? `${relise} - ${format(release_date, 'd MMMM, yyyy', { locale: ru })}`
+              : ''}
+          </div>
+          <div>
+            <ul className="geners">{genres.length !== 0 ? gen : ''}</ul>
+          </div>
+          <div className="overview">{overview}</div>
+        </div>
+      </Drawer>
     </>
   );
 }

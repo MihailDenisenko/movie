@@ -3,13 +3,16 @@
 @use './Components/Films/Films.scss';
 @use './Components/fonts/fonts.scss';
 @use './Components/Pagination/Pagination';
+// @use './Components/Home/Home';
 
 body {
     display: block;
+    width: 100%;
     position: relative;
 }
 
 #root {
+    width: 100%;
     position: absolut;
     top: 0;
 }   
@@ -18,13 +21,18 @@ body {
     text-align: center;
     margin: 0 auto;
 }
- body {
-    width: 100%;
- }
 
- #root {
-    width: 100%;
- }
+.div__buttons {
+    // display: flex;
+    margin-top: 5px;
+    flex-wrap: nowrap;
+    align-items: end;
+    text-align: center;
+
+    .batSearch{
+        margin-right: 45px;
+    }
+}
 
 .loder {
     display: inline;

@@ -6,6 +6,7 @@
     align-items: center;
     top:0;
     display: block;
+    height: 60px;
 }
 
 .input {
@@ -39,4 +40,17 @@
     position: absolute;
     right: 50px;
     top: 12px;
+}
+
+@media screen and (width<450px) {
+    .root {
+        margin-bottom: 15px;
+    }
+    .input{
+        width: 220px;
+    }
+    .drop {
+        right: 15px;
+        top: 20px;
+    }
 }

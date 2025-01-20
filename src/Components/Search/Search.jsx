@@ -1,13 +1,16 @@
  
-/* eslint-disable react/prop-types */
+//  eslint-disable react/prop-types 
 import 'react'
-import React from 'react';
+
 import styles from "./Search.module.scss"
+
 import { CloseOutlined } from '@ant-design/icons';
-// import  closeIcon  from "../img/close.svg";
+
 import { DownOutlined } from '@ant-design/icons';
 import { Dropdown, Space, Typography } from 'antd';
 import { HomeContext } from '../Home/Home';
+import React from 'react';
+
 const items = [
   {
     key: '1',
@@ -22,10 +25,10 @@ const items = [
 
  
  export default function Search() {
-   
-   const { searchVal, setSearchVal, languageSearch, setLanguageSearch } =
+    const { searchVal, setSearchVal, languageSearch, setLanguageSearch, favor } =
      React.useContext(HomeContext);
 
+   
   return (
     <div className={styles.root}>
       {searchVal ? (
@@ -33,13 +36,15 @@ const items = [
       ) : (
         ''
       )}
+      {!favor?
       <input
         className={styles.input}
         type="text"
-        placeholder="поиск фильмов"
+        placeholder={languageSearch!=='en-En'?"поиск фильмов":"Search Movies"}
         onChange={(e) => setSearchVal(e.target.value)}
         value={searchVal}
-      ></input>
+        ></input>:''
+      }
       
       <Dropdown
         className={styles.drop}
@@ -54,7 +59,7 @@ const items = [
           },
           items,
           
-          defaultSelectedKeys: ['1'],
+          defaultSelectedKeys: [''],
         }}
       >
         <Typography.Link >
