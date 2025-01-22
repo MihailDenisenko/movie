@@ -125,7 +125,7 @@ export default function Film({
       <Drawer
         className="DrawerClass"
         width={980}
-        title="Закрыть окно просмотра"
+        title="Закрыть окно просмотра "
         onClose={onClose}
         open={open}
       >
