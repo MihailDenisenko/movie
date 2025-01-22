@@ -107,9 +107,9 @@ export default function Film({
                     <div className={`vote_average ${colClass}`}>{`${vote_average.toFixed(1)}`}</div>
                   </div>
                   <div className="release_date">
-                    {release_date ? dateFns.format(release_date, 'd MMMM, yyyy', { locale: ru }) : ''}
+                    {release_date ? dateFns.format(release_date, 'd MMMM, yyyy', { locale: ru }) : null}
                   </div>
-                  <ul className="geners">{genres.length !== 0 ? gen : ''}</ul>
+                  <ul className="geners">{genres.length !== 0 ? gen : null}</ul>
                   <div className="overview">{overview}</div>
                 </div>
               </div>
@@ -125,7 +125,7 @@ export default function Film({
       <Drawer
         className="DrawerClass"
         width={980}
-        title="Basic Drawer"
+        title="Закрыть окно просмотра"
         onClose={onClose}
         open={open}
       >
@@ -138,10 +138,10 @@ export default function Film({
           <div className="release_date">
             {release_date
               ? `${relise} - ${dateFns.format(release_date, 'd MMMM, yyyy', { locale: ru })}`
-              : ''}
+              : null}
           </div>
           <div>
-            <ul className="geners">{genres.length !== 0 ? gen : ''}</ul>
+            <ul className="geners">{genres.length !== 0 ? gen : null}</ul>
           </div>
           <div className="overview">{overview}</div>
         </div>

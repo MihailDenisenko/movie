@@ -54,7 +54,7 @@ export default function Ratet({ id }) {
 
     fetch(url, optionsi)
       .then((res) => {
-        res.ok ? success() : '';
+        res.ok ? success() : null;
         return res.json();
       })
       .then((json) => console.log(json, sessionStorage.getItem('guest_session_id')))

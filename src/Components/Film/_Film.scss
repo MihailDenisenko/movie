@@ -229,7 +229,7 @@
   width: 700px;
 }
 
-@media screen and (width<400px) {
+@media screen and (width<460px) {
   .film {
     max-width: 451px;
     min-width: 260px;
@@ -243,10 +243,19 @@
 .ratet_bg {
   background: #00000008;
 }
-@media screen and (width<350px) {
+@media screen and (width<460px) {
+  
+  :where(.css-dev-only-do-not-override-7ny38l).ant-drawer .ant-drawer-header {
+    // position: absolute;
+    top: 0;
+    left: 0;
+
+  }
+  
   .title__b {
     font-size: 18px;
   }
+
   .about {
     .vote_average {
       // position: relative;

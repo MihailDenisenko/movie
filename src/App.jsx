@@ -35,7 +35,7 @@ function App() {
     ? setTimeout(() => {
         setLoader(false);
       }, 500)
-    : '';
+    : null;
 
   return (
     <>
@@ -48,7 +48,7 @@ function App() {
       )}
       <Offline>
         {loader ? (
-          ''
+          null
         ) : (
           <div className="alert">
             <Alert

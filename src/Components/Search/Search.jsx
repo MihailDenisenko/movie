@@ -30,7 +30,7 @@ export default function Search() {
       {searchVal ? (
         <CloseOutlined className={styles.closed} onClick={() => setSearchVal('')} />
       ) : (
-        ''
+        null
       )}
       {!favor ? (
         <input
@@ -41,7 +41,7 @@ export default function Search() {
           value={searchVal}
         ></input>
       ) : (
-        ''
+        null
       )}
 
       <Dropdown
